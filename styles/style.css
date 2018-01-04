@@ -15,7 +15,7 @@
     background: green;
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 200vh;
 }
 
 .content {
@@ -37,8 +37,9 @@
     text-align: center;
 }
 
-#standings {
+.standings {
     display: grid;
+
     grid-template-columns: 25% 25% 25% 25%;
     width: 100%;
 }
@@ -55,3 +56,30 @@
 .sim:active {
     border: 2px solid white;
 }
+
+.big-chart {
+    display: flex;
+}
+
+.standings-table {
+    flex: 1;
+}
+
+#afc {
+    flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/
