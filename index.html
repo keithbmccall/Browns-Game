@@ -17,32 +17,51 @@
             <li class="nav-list">NEXT GAME</li>
         </ul>
     </div>
+    <div id="quiz-modal" class="animate-modal">
+        <div class="quiz-card">
+            <div class="quiz-question">
+                <div id="question" class="quiz">QUESTION
+                </div>
+            </div>
+            <div class="quiz-answer">
+                <div id="a" class="quiz-choices">ANSWER</div>
+                <div id="b" class="quiz-choices">ANSWER</div>
+                <div id="c" class="quiz-choices">ANSWER</div>
+                <div id="d" class="quiz-choices">ANSWER</div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
     <div id="main-container">
         <div class="content">
-            <div class="title centered">WELCOME TO NFL SIM FOOTBALL 17
+            <div class="title centered">STANDINGS
             </div>
-            <div class="sim centered">SIMULATE week1</div>
-            <div class="sim centered">SIMULATE week2</div>
-            <div class="sim centered">SIMULATE week3</div>
-            <div class="sim centered">SIMULATE week4</div>
             <div class="title centered big-chart">
-                <div id="nfc" class="title centered standings-table">AFC STANDINGS
+                <div id="nfc" class="title centered standings-table">AFC
                     <div class="standings">
-                        <div class="afc-standings-name"></div>
-                        <div class="afc-standings-wins"></div>
-                        <div class="afc-standings-losses"></div>
-                        <div class="afc-standings-ties"></div>
+                        <div class="afc-standings-name standings-content"></div>
+                        <div class="afc-standings-wins standings-content"></div>
+                        <div class="afc-standings-losses standings-content"></div>
+                        <div class="afc-standings-ties standings-content"></div>
+                        <div class="afc-standings-percent standings-content"></div>
                     </div>
                 </div>
-                <div id="nfc" class="title centered standings-table">NFC STANDINGS
-                    <div class="standings">
-                        <div class="nfc-standings-name"></div>
-                        <div class="nfc-standings-wins"></div>
-                        <div class="nfc-standings-losses"></div>
-                        <div class="nfc-standings-ties"></div>
+                <div id="nfc" class="title centered standings-table">NFC
+                    <div class="standings standings-content">
+                        <div class="nfc-standings-name standings-content"></div>
+                        <div class="nfc-standings-wins standings-content"></div>
+                        <div class="nfc-standings-losses standings-content"></div>
+                        <div class="nfc-standings-ties standings-content"></div>
+                        <div class="nfc-standings-percent standings-content"></div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="content">
+            <div class="title centered">SCORES
+            </div>
+            <div class="nfc-scores scores"></div>
+            <div class="afc-scores scores"></div>
         </div>
     </div>
 </body>
