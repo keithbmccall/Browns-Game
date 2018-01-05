@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body {
+    font-family: 'Oswald', sans-serif;
+}
+
 @font-face {
     font-family: "NFL";
     src: url("NFL/62f21f04317a4fcf65fd6177f6bda3a3.eot?") format("eot"), url("NFL/62f21f04317a4fcf65fd6177f6bda3a3.woff") format("woff"), url("NFL/62f21f04317a4fcf65fd6177f6bda3a3.ttf") format("truetype"), url("NFL/62f21f04317a4fcf65fd6177f6bda3a3.svg#NFL") format("svg");
@@ -12,8 +16,8 @@
 }
 
 #main-container {
-    background: green;
-    position: relative;
+    background: #ddd;
+    /*position: relative;*/
     width: 100vw;
     height: 200vh;
 }
@@ -65,9 +69,67 @@
     flex: 1;
 }
 
-#afc {
-    flex: 1;
+.nav {
+    position: relative;
+    height: 60px;
+    width: 100vw;
+    background: #0159DE;
 }
+
+.nav-list {
+    flex: 1;
+    /*background: red;*/
+    border: 1px solid black;
+    height: 100%;
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+}
+
+.nav-container {
+    position: relative;
+    left: 30px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    background: green;
+    list-style-type: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
