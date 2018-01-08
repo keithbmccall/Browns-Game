@@ -61,7 +61,7 @@ var chargers = new Team('Los Angeles', 'Chargers', 'StubHub Center', [4, 5, 7]);
 var broncos = new Team('Denver', 'Broncos', 'Sports Authority Field at Mile High', [2, 3, 5]);
 
 var afcEast = [patriots, dolphins, jets, bills];
-var afcNorth = [steelers, browns, bengals, ravens];
+var afcNorth = [browns, steelers, bengals, ravens];
 var afcSouth = [jaguars, titans, colts, texans];
 var afcWest = [chiefs, raiders, chargers, broncos];
 var afc = [afcEast, afcNorth, afcSouth, afcWest];
@@ -137,6 +137,51 @@ function game(home, away) {
 
 };
 
+function brownsGame(home, away) {
+    var homeScore = home.score() + 3; //homefield advantage
+    var awayScore = away.score();
+    console.log(home == browns);
+    console.log(away == browns);
+
+    home.totalPoints += homeScore;
+    away.totalPoints += awayScore;
+    if (homeScore == awayScore) {
+        homeScore += Math.floor(Math.random() * 6);
+        awayScore += Math.floor(Math.random() * 6);
+        if (homeScore == awayScore) {
+            home.ties++;
+            away.ties++;
+        } else if (homeScore > awayScore) {
+            home.wins++;
+            away.losses++;
+        } else if (homeScore < awayScore) {
+            home.losses++;
+            away.wins++;
+        }
+    } else if (homeScore > awayScore) {
+        home.wins++;
+        away.losses++;
+    } else if (homeScore < awayScore) {
+        home.losses++;
+        away.wins++;
+    }
+
+
+    var $div = $('<div>').addClass('scores-table standings scores-flex');
+    $div.append($('<p>').text(`${home.name}: ${homeScore}`));
+    $div.append($('<p>').text(`${away.name}: ${awayScore}`));
+    $scores.append($div)
+
+    var $cmdDiv = $('<div>').addClass('scores-table standings scores-flex console-score');
+    $cmdDiv.append($('<p>').text(`${home.name}: ${homeScore}`));
+    $cmdDiv.append($('<p>').text(`${away.name}: ${awayScore}`));
+    $('#game-score').append($cmdDiv);
+
+
+
+
+};
+
 //SCHEDULE
 
 var gameday1 = function() {
@@ -145,7 +190,7 @@ var gameday1 = function() {
     game(afcWest[2], afcWest[3]);
     game(afcSouth[0], afcSouth[1]);
     game(afcSouth[2], afcSouth[3]);
-    game(afcNorth[0], afcNorth[1]);
+    brownsGame(afcNorth[0], afcNorth[1]);
     game(afcNorth[2], afcNorth[3]);
     game(afcEast[0], afcEast[1]);
     game(afcEast[2], afcEast[3]);
@@ -815,11 +860,13 @@ var setSkillUp = function() {
     browns.score = function() {
         return 45;
     }
+    $('.greeting').text("QUIZ CORRECT")
 }
 var setSkillDown = function() {
     browns.score = function() {
         return 12;
     }
+    $('.greeting').text("QUESTION WRONG")
 }
 
 var check = function() {
@@ -843,7 +890,6 @@ var renderQuestion = function() {
     $quizD.text(quiz[questionIndex].responses[3]).click(check);
     console.log('renderQuestion')
 }
-console.log(browns.skill);
 renderQuestion();
 
 ///////////////////////////////
@@ -862,8 +908,8 @@ var nextweek = function() {
     }
 }
 
-$('.sim').click(schedule[questionIndex]);
-$('.sim').click(nextweek);
+$('.sim-week').click(schedule[questionIndex]);
+$('.sim-week').click(nextweek);
 
 
 

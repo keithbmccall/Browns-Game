@@ -50,7 +50,7 @@ body {
     height: 99%;
     width: 99%;
     border: 5px solid white;
-    display: flex;
+
     position: absolute;
 }
 
@@ -138,7 +138,7 @@ body {
     margin-bottom: 3px;
 }
 
-.quiz-border-radius {
+.border-radius {
     border-radius: 10px;
     border-radius-inner
 }
@@ -196,7 +196,68 @@ body {
     text-decoration: underline;
 }
 
-.console-heading {}
+.greeting {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+.sim-week {
+    height: 30px;
+}
+
+#game-score {
+    flex: 4;
+}
+
+.console-score {
+    font-size: 50px;
+}
+
+.console-content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    background: #654321;
+    width: 600px;
+    height: 500px;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
