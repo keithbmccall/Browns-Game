@@ -99,20 +99,97 @@ var nfc = [nfcEast, nfcNorth, nfcSouth, nfcWest];
 //game logic and scheduling
 var $scores = $('.scores');
 
-
-
-
 function game(home, away) {
+    function renderCommandCenterScore() {
+        var $cmdDiv = $('<div>').addClass('scores-table standings scores-flex console-score');
+        $cmdDiv.append($('<p>').text(`${home.name}: ${homeScore}`));
+        $cmdDiv.append($('<p>').text(`${away.name}: ${awayScore}`));
+        $('#game-score').append($cmdDiv);
+    }
+
+    function winGreeting() {
+        $('.greeting').text("YOU WON")
+    }
+
+    function loseGreeting() {
+        $('.greeting').text("YOU LOST")
+    }
     var homeScore = home.score() + 3; //homefield advantage
     var awayScore = away.score();
-    home.totalPoints += homeScore;
-    away.totalPoints += awayScore;
-    if (homeScore == awayScore) {
-        homeScore += Math.floor(Math.random() * 6);
-        awayScore += Math.floor(Math.random() * 6);
+    if (home == browns) {
+        home.totalPoints += homeScore;
+        away.totalPoints += awayScore;
         if (homeScore == awayScore) {
-            home.ties++;
-            away.ties++;
+            homeScore += Math.floor(Math.random() * 6);
+            awayScore += Math.floor(Math.random() * 6);
+            if (homeScore == awayScore) {
+                home.ties++;
+                away.ties++;
+            } else if (homeScore > awayScore) {
+                home.wins++;
+                winGreeting();
+                away.losses++;
+            } else if (homeScore < awayScore) {
+                home.losses++;
+                loseGreeting();
+                away.wins++;
+            }
+        } else if (homeScore > awayScore) {
+            home.wins++;
+            winGreeting();
+            away.losses++;
+        } else if (homeScore < awayScore) {
+            home.losses++;
+            loseGreeting();
+            away.wins++;
+        }
+        renderCommandCenterScore();
+    }
+    if (away == browns) {
+        home.totalPoints += homeScore;
+        away.totalPoints += awayScore;
+        if (homeScore == awayScore) {
+            homeScore += Math.floor(Math.random() * 6);
+            awayScore += Math.floor(Math.random() * 6);
+            if (homeScore == awayScore) {
+                home.ties++;
+                away.ties++;
+            } else if (homeScore > awayScore) {
+                home.wins++;
+                loseGreeting();
+                away.losses++;
+            } else if (homeScore < awayScore) {
+                home.losses++;
+                away.wins++;
+                winGreeting();
+            }
+        } else if (homeScore > awayScore) {
+            home.wins++;
+            loseGreeting();
+            away.losses++;
+        } else if (homeScore < awayScore) {
+            home.losses++;
+            away.wins++;
+            winGreeting();
+        }
+        renderCommandCenterScore();
+    } else if (home != browns && away != browns) {
+
+        home.totalPoints += homeScore;
+        away.totalPoints += awayScore;
+        if (homeScore == awayScore) {
+            homeScore += Math.floor(Math.random() * 6);
+            awayScore += Math.floor(Math.random() * 6);
+            if (homeScore == awayScore) {
+                home.ties++;
+                away.ties++;
+            } else if (homeScore > awayScore) {
+                home.wins++;
+                away.losses++;
+            } else if (homeScore < awayScore) {
+                home.losses++;
+                away.wins++;
+            }
         } else if (homeScore > awayScore) {
             home.wins++;
             away.losses++;
@@ -120,12 +197,7 @@ function game(home, away) {
             home.losses++;
             away.wins++;
         }
-    } else if (homeScore > awayScore) {
-        home.wins++;
-        away.losses++;
-    } else if (homeScore < awayScore) {
-        home.losses++;
-        away.wins++;
+
     }
 
 
@@ -137,50 +209,7 @@ function game(home, away) {
 
 };
 
-function brownsGame(home, away) {
-    var homeScore = home.score() + 3; //homefield advantage
-    var awayScore = away.score();
-    console.log(home == browns);
-    console.log(away == browns);
 
-    home.totalPoints += homeScore;
-    away.totalPoints += awayScore;
-    if (homeScore == awayScore) {
-        homeScore += Math.floor(Math.random() * 6);
-        awayScore += Math.floor(Math.random() * 6);
-        if (homeScore == awayScore) {
-            home.ties++;
-            away.ties++;
-        } else if (homeScore > awayScore) {
-            home.wins++;
-            away.losses++;
-        } else if (homeScore < awayScore) {
-            home.losses++;
-            away.wins++;
-        }
-    } else if (homeScore > awayScore) {
-        home.wins++;
-        away.losses++;
-    } else if (homeScore < awayScore) {
-        home.losses++;
-        away.wins++;
-    }
-
-
-    var $div = $('<div>').addClass('scores-table standings scores-flex');
-    $div.append($('<p>').text(`${home.name}: ${homeScore}`));
-    $div.append($('<p>').text(`${away.name}: ${awayScore}`));
-    $scores.append($div)
-
-    var $cmdDiv = $('<div>').addClass('scores-table standings scores-flex console-score');
-    $cmdDiv.append($('<p>').text(`${home.name}: ${homeScore}`));
-    $cmdDiv.append($('<p>').text(`${away.name}: ${awayScore}`));
-    $('#game-score').append($cmdDiv);
-
-
-
-
-};
 
 //SCHEDULE
 
@@ -190,7 +219,7 @@ var gameday1 = function() {
     game(afcWest[2], afcWest[3]);
     game(afcSouth[0], afcSouth[1]);
     game(afcSouth[2], afcSouth[3]);
-    brownsGame(afcNorth[0], afcNorth[1]);
+    game(afcNorth[0], afcNorth[1]);
     game(afcNorth[2], afcNorth[3]);
     game(afcEast[0], afcEast[1]);
     game(afcEast[2], afcEast[3]);
@@ -860,13 +889,13 @@ var setSkillUp = function() {
     browns.score = function() {
         return 45;
     }
-    $('.greeting').text("QUIZ CORRECT")
+    $('.greeting').text("CORRECT ANSWER")
 }
 var setSkillDown = function() {
     browns.score = function() {
         return 12;
     }
-    $('.greeting').text("QUESTION WRONG")
+    $('.greeting').text("WRONG ANSWER")
 }
 
 var check = function() {
@@ -880,6 +909,7 @@ var check = function() {
 
     }
     console.log("browns: " + browns.skill)
+    setTimeout(revealCommandCenter, 500)
 }
 var renderQuestion = function() {
     $week.text(gameTextArray[questionIndex]);
@@ -897,19 +927,39 @@ renderQuestion();
 //PAGE FUNCTIONALITY
 var nextweek = function() {
 
-    $('.sim').off('click', schedule[questionIndex]);
+    $('#sim-week').off('click', schedule[questionIndex]);
     questionIndex++;
-    $('.sim').click(schedule[questionIndex]);
+    $('#sim-week').click(schedule[questionIndex]);
     if (questionIndex == 16) {
         console.log('season complete');
-        $('.sim').off('click', schedule[questionIndex]);
+        $('#sim-week').off('click', schedule[questionIndex]);
     } else {
         renderQuestion();
     }
 }
 
-$('.sim-week').click(schedule[questionIndex]);
-$('.sim-week').click(nextweek);
+function revealResults() {
+    $('#console-container').addClass('hide');
+    $('#main-container').removeClass('hide');
+}
+
+function revealQuiz() {
+    $('#game-score').empty();
+    $('#main-container').addClass('hide');
+    $('#quiz-modal').removeClass('hide');
+}
+
+function revealCommandCenter() {
+    $('#console-container').removeClass('hide');
+    $('#quiz-modal').addClass('hide');
+}
+
+
+
+$('#sim-week').click(schedule[questionIndex]);
+$('#sim-week').click(nextweek);
+$('#results-button').click(revealResults);
+$('#quiz-button').click(revealQuiz);
 
 
 

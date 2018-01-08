@@ -8,6 +8,8 @@ body {
     font-family: 'Oswald', sans-serif;
     height: 100vh;
     width: 100vw;
+    background: #654321;
+    overflow: hidden;
 }
 
 @font-face {
@@ -33,7 +35,6 @@ body {
     border: 5px solid white;
     display: flex;
     position: absolute;
-    left: 100%;
 }
 
 #quiz-modal {
@@ -42,7 +43,6 @@ body {
     height: 99%;
     width: 99%;
     border: 5px solid white;
-    left: 100%;
 }
 
 #console-container {
@@ -50,7 +50,6 @@ body {
     height: 99%;
     width: 99%;
     border: 5px solid white;
-
     position: absolute;
 }
 
@@ -158,11 +157,11 @@ body {
 }
 
 .quiz-choices:hover {
-    border: 3px solid #654321;
+    border: 3px solid white;
 }
 
 .quiz-choices:active {
-    border: 5px solid #654321;
+    border: 5px solid white;
 }
 
 .quiz-choices:hover {
@@ -203,9 +202,7 @@ body {
     letter-spacing: 5px;
 }
 
-.sim-week {
-    height: 30px;
-}
+
 
 #game-score {
     flex: 4;
@@ -228,6 +225,96 @@ body {
     flex-direction: column;
     color: white;
 }
+
+.slide-button {
+    position: absolute;
+    left: 85%;
+    top: 50%;
+    color: white;
+    background: #f26400;
+    width: 100px;
+}
+
+.slide-button:hover {
+    border: 3px solid white;
+}
+
+.slide-button:active {
+    border: 5px solid white;
+}
+
+.slide-button:hover {
+    cursor: pointer;
+}
+
+.left {
+    left: 0;
+    transition: all 1s ease;
+}
+
+.hide {
+    left: 100%;
+}
+
+#quiz-button {
+    top: 75%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
