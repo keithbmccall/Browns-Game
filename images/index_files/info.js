@@ -1,4 +1,6 @@
-console.log("connected");
+console.log("info")
+
+
 
 var $afcStandingsName = $('.afc-standings-name');
 var $afcStandingsWins = $('.afc-standings-wins');
@@ -12,7 +14,6 @@ var $nfcStandingsLosses = $('.nfc-standings-losses');
 var $nfcStandingsTies = $('.nfc-standings-ties');
 var $nfcStandingsPercent = $('.nfc-standings-percent');
 
-
 function Team(city, name, stadium, skill) {
     this.city = city;
     this.name = name;
@@ -22,6 +23,9 @@ function Team(city, name, stadium, skill) {
     this.losses = 0;
     this.ties = 0;
     this.totalPoints = 0;
+    this.percent = function() {
+        return this.wins / (this.wins + this.losses + this.ties)
+    }
     this.standing = function() {
         return `${this.wins}:${this.losses}:${this.ties}`
     }
@@ -97,8 +101,6 @@ var nfc = [nfcEast, nfcNorth, nfcSouth, nfcWest];
 
 
 //game logic and scheduling
-var $scores = $('.scores');
-
 
 
 
@@ -127,20 +129,14 @@ function game(home, away) {
         home.losses++;
         away.wins++;
     }
-
-
-    var $div = $('<div>').addClass('scores-table standings scores-flex');
-    $div.append($('<p>').text(`${home.name}: ${homeScore}`));
-    $div.append($('<p>').text(`${away.name}: ${awayScore}`));
-    $scores.append($div)
-
-
+    return `${home.name}-${homeScore}:${away.name}-${awayScore}
+    ${home.name} record: ${home.standing()} ... ${home.percent()}
+    ${away.name} record: ${away.standing()} ... ${away.percent()}
+    `
 };
-
 //SCHEDULE
 
 var gameday1 = function() {
-    $scores.empty();
     game(afcWest[0], afcWest[1]);
     game(afcWest[2], afcWest[3]);
     game(afcSouth[0], afcSouth[1]);
@@ -159,10 +155,8 @@ var gameday1 = function() {
     game(nfcEast[2], nfcEast[3]);
 
     renderStandings();
-    console.log('week1')
 };
 var gameday2 = function() {
-    $scores.empty();
     game(afcWest[3], afcWest[0]);
     game(afcWest[1], afcWest[2]);
     game(afcSouth[3], afcSouth[0]);
@@ -182,10 +176,8 @@ var gameday2 = function() {
     game(nfcEast[1], nfcEast[2]);
 
     renderStandings();
-    console.log('week2')
 };
 var gameday3 = function() {
-    $scores.empty();
     game(afcWest[0], afcWest[2]);
     game(afcWest[1], afcWest[3]);
     game(afcSouth[0], afcSouth[2]);
@@ -204,10 +196,8 @@ var gameday3 = function() {
     game(nfcEast[0], nfcEast[2]);
     game(nfcEast[1], nfcEast[3]);
     renderStandings();
-    console.log('week3')
 };
 var gameday4 = function() {
-    $scores.empty();
     game(afcWest[2], afcWest[0]);
     game(afcWest[3], afcWest[1]);
     game(afcSouth[2], afcSouth[0]);
@@ -226,10 +216,8 @@ var gameday4 = function() {
     game(nfcEast[2], nfcEast[0]);
     game(nfcEast[3], nfcEast[1]);
     renderStandings();
-    console.log('week4')
 };
 var gameday5 = function() {
-    $scores.empty();
     game(afcWest[0], afcEast[0]);
     game(afcWest[1], afcEast[1]);
     game(afcWest[2], afcEast[2]);
@@ -248,10 +236,8 @@ var gameday5 = function() {
     game(nfcNorth[2], nfcSouth[2]);
     game(nfcNorth[3], nfcSouth[3]);
     renderStandings();
-    console.log('week5')
 }
 var gameday6 = function() {
-    $scores.empty();
     game(afcSouth[0], afcEast[0]);
     game(afcSouth[1], afcEast[1]);
     game(afcSouth[2], afcEast[2]);
@@ -270,10 +256,8 @@ var gameday6 = function() {
     game(nfcNorth[2], nfcWest[2]);
     game(nfcNorth[3], nfcWest[3]);
     renderStandings();
-    console.log('week6')
 }
 var gameday7 = function() {
-    $scores.empty();
     game(afcWest[0], afcSouth[0]);
     game(afcWest[1], afcSouth[1]);
     game(afcWest[2], afcSouth[2]);
@@ -293,10 +277,8 @@ var gameday7 = function() {
     game(nfcEast[3], nfcNorth[3]);
 
     renderStandings();
-    console.log('week7')
 }
 var gameday8 = function() {
-    $scores.empty();
     game(afcWest[0], nfcWest[0]);
     game(afcWest[1], nfcWest[1]);
     game(afcWest[2], nfcWest[2]);
@@ -315,10 +297,8 @@ var gameday8 = function() {
     game(afcSouth[2], nfcSouth[2]);
     game(afcSouth[3], nfcSouth[3]);
     renderStandings();
-    console.log('week8')
 }
 var gameday9 = function() {
-    $scores.empty();
     game(afcWest[0], nfcWest[1]);
     game(afcWest[1], nfcWest[2]);
     game(afcWest[2], nfcWest[3]);
@@ -337,10 +317,8 @@ var gameday9 = function() {
     game(afcSouth[2], nfcSouth[3]);
     game(afcSouth[3], nfcSouth[0]);
     renderStandings();
-    console.log('week9')
 }
 var gameday10 = function() {
-    $scores.empty();
     game(nfcWest[2], afcWest[0]);
     game(nfcWest[3], afcWest[1]);
     game(nfcWest[0], afcWest[2]);
@@ -359,10 +337,8 @@ var gameday10 = function() {
     game(nfcSouth[0], afcSouth[2]);
     game(nfcSouth[1], afcSouth[3]);
     renderStandings();
-    console.log('week10')
 }
 var gameday11 = function() {
-    $scores.empty();
     game(nfcWest[3], afcWest[0]);
     game(nfcWest[0], afcWest[1]);
     game(nfcWest[1], afcWest[2]);
@@ -381,10 +357,8 @@ var gameday11 = function() {
     game(nfcSouth[1], afcSouth[2]);
     game(nfcSouth[2], afcSouth[3]);
     renderStandings();
-    console.log('week11')
 }
 var gameday12 = function() {
-    $scores.empty();
     game(afcWest[0], afcEast[1]);
     game(afcWest[1], afcEast[2]);
     game(afcWest[2], afcEast[3]);
@@ -404,10 +378,8 @@ var gameday12 = function() {
     game(nfcNorth[3], nfcSouth[0]);
 
     renderStandings();
-    console.log('week12')
 }
 var gameday13 = function() {
-    $scores.empty();
     game(afcEast[2], afcWest[0]);
     game(afcEast[3], afcWest[1]);
     game(afcEast[0], afcWest[2]);
@@ -427,10 +399,8 @@ var gameday13 = function() {
     game(nfcSouth[1], nfcNorth[3]);
 
     renderStandings();
-    console.log('week13')
 }
 var gameday14 = function() {
-    $scores.empty();
     game(afcEast[3], afcWest[0]);
     game(afcEast[0], afcWest[1]);
     game(afcEast[1], afcWest[2]);
@@ -450,10 +420,8 @@ var gameday14 = function() {
     game(nfcSouth[2], nfcNorth[3]);
 
     renderStandings();
-    console.log('week14')
 }
 var gameday15 = function() {
-    $scores.empty();
     game(afcWest[1], afcWest[0]);
     game(afcWest[3], afcWest[2]);
     game(afcSouth[1], afcSouth[0]);
@@ -472,10 +440,8 @@ var gameday15 = function() {
     game(nfcEast[3], nfcEast[2]);
 
     renderStandings();
-    console.log('week15')
 }
 var gameday16 = function() {
-    $scores.empty();
     game(afcWest[0], afcWest[3]);
     game(afcWest[2], afcWest[1]);
     game(afcSouth[0], afcSouth[3]);
@@ -495,7 +461,6 @@ var gameday16 = function() {
     game(nfcEast[2], nfcEast[1]);
 
     renderStandings();
-    console.log('week16')
 }
 var schedule = [
     gameday1,
@@ -517,16 +482,16 @@ var schedule = [
 ]
 var updateAFCStandings = function() {
     var afcEastByWins = afcEast.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     });
     var afcNorthByWins = afcNorth.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
     var afcSouthByWins = afcSouth.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
     var afcWestByWins = afcWest.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
 
     var afcByWins = [afcEastByWins, afcWestByWins, afcSouthByWins, afcNorthByWins];
@@ -540,7 +505,7 @@ var updateAFCStandings = function() {
     });
 
     var afcStandingsByWins = afcStandingsByWins.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
 
 
@@ -557,16 +522,16 @@ var updateAFCStandings = function() {
 };
 var updateNFCStandings = function() {
     var nfcEastByWins = nfcEast.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
     var nfcNorthByWins = nfcNorth.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
     var nfcSouthByWins = nfcSouth.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
     var nfcWestByWins = nfcWest.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
 
     var nfcByWins = [nfcEastByWins, nfcWestByWins, nfcSouthByWins, nfcNorthByWins];
@@ -579,7 +544,7 @@ var updateNFCStandings = function() {
     });
 
     var nfcStandingsByWins = nfcStandingsByWins.sort(function(a, b) {
-        return b.wins - a.wins
+        return b.percent - a.percent
     })
 
 
@@ -605,14 +570,16 @@ var emptyStandings = function() {
     $nfcStandingsPercent.empty();
 };
 var fillStandings = function() {
-    $afcStandingsName.append($('<div>').addClass('standings-content underline').text('Team'));
-    $afcStandingsWins.append($('<div>').addClass('standings-content underline').text('W'));
-    $afcStandingsLosses.append($('<div>').addClass('standings-content underline').text('L'));
-    $afcStandingsTies.append($('<div>').addClass('standings-content underline').text('T'));
-    $nfcStandingsName.append($('<div>').addClass('standings-content underline').text('Team'));
-    $nfcStandingsWins.append($('<div>').addClass('standings-content underline').text('W'));
-    $nfcStandingsLosses.append($('<div>').addClass('standings-content underline').text('L'));
-    $nfcStandingsTies.append($('<div>').addClass('standings-content underline').text('T'));
+    $afcStandingsName.append($('<div>').addClass('standings-content').text('Team'));
+    $afcStandingsWins.append($('<div>').addClass('standings-content').text('W'));
+    $afcStandingsLosses.append($('<div>').addClass('standings-content').text('L'));
+    $afcStandingsTies.append($('<div>').addClass('standings-content').text('T'));
+    // $afcStandingsPercent.append($('<div>').addClass('standings-content').text('%'));
+    $nfcStandingsName.append($('<div>').addClass('standings-content').text('Team'));
+    $nfcStandingsWins.append($('<div>').addClass('standings-content').text('W'));
+    $nfcStandingsLosses.append($('<div>').addClass('standings-content').text('L'));
+    $nfcStandingsTies.append($('<div>').addClass('standings-content').text('T'));
+    // $nfcStandingsPercent.append($('<div>').addClass('standings-content').text('%'));
 };
 var renderStandings = function() {
     emptyStandings();
@@ -801,75 +768,3 @@ var gameTextArray = [
     "GAME 15",
     "GAME 16"
 ]
-
-//TRIVIA SETUP
-var questionIndex = 0;
-var $quizD = $('#d');
-var $quizC = $('#c');
-var $quizB = $('#b');
-var $quizA = $('#a');
-var $quizQuestion = $('#question');
-var $week = $('#week-declaration');
-
-var setSkillUp = function() {
-    browns.score = function() {
-        return 45;
-    }
-}
-var setSkillDown = function() {
-    browns.score = function() {
-        return 12;
-    }
-}
-
-var check = function() {
-    console.log("browns: pre-" + browns.skill)
-    if (this.textContent == quiz[questionIndex].correct) {
-        console.log("GOOD");
-        setSkillUp();
-    } else {
-        console.log("NOPE")
-        setSkillDown();
-
-    }
-    console.log("browns: " + browns.skill)
-}
-var renderQuestion = function() {
-    $week.text(gameTextArray[questionIndex]);
-    $quizQuestion.text(quiz[questionIndex].question);
-    $quizA.text(quiz[questionIndex].responses[0]).click(check);
-    $quizB.text(quiz[questionIndex].responses[1]).click(check);
-    $quizC.text(quiz[questionIndex].responses[2]).click(check);
-    $quizD.text(quiz[questionIndex].responses[3]).click(check);
-    console.log('renderQuestion')
-}
-console.log(browns.skill);
-renderQuestion();
-
-///////////////////////////////
-//////////////////////////////
-//PAGE FUNCTIONALITY
-var nextweek = function() {
-
-    $('.sim').off('click', schedule[questionIndex]);
-    questionIndex++;
-    $('.sim').click(schedule[questionIndex]);
-    if (questionIndex == 16) {
-        console.log('season complete');
-        $('.sim').off('click', schedule[questionIndex]);
-    } else {
-        renderQuestion();
-    }
-}
-
-$('.sim').click(schedule[questionIndex]);
-$('.sim').click(nextweek);
-
-
-
-
-
-
-
-
-//
