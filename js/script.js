@@ -973,6 +973,10 @@ var renderPlayoffs = function() {
     var afcStandingsByWins = afcStandingsByWins.sort(function(a, b) {
         return b.wins - a.wins
     })
+
+
+
+    // WINCONDITION
     var afcPlayoffs = [];
     for (i = 0; i < 6; i++) {
         afcPlayoffs.push(afcStandingsByWins.shift())
@@ -1034,7 +1038,7 @@ function init() {
     $('#sim-week').click(nextweek);
     $('#quiz-button').click(revealQuiz);
     $('#home-button').click(openQuiz);
-    $('#try-again').click(function() {
+    $('.try-again').click(function() {
         location.reload();
     });
 
