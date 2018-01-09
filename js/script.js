@@ -885,10 +885,12 @@ var $quizA = $('#a');
 var $quizQuestion = $('#question');
 var $week = $('#week-declaration');
 
+var correctAnswerTally = 0;
 var setSkillUp = function() {
     browns.score = function() {
         return 45;
     }
+
     $('.greeting').text("CORRECT ANSWER")
 }
 var setSkillDown = function() {
@@ -899,16 +901,17 @@ var setSkillDown = function() {
 }
 
 var check = function() {
-    console.log("browns: pre-" + browns.skill)
+
     if (this.textContent == quiz[questionIndex].correct) {
         console.log("GOOD");
+        console.log(correctAnswerTally++);
         setSkillUp();
     } else {
         console.log("NOPE")
         setSkillDown();
 
     }
-    console.log("browns: " + browns.skill)
+
     setTimeout(revealCommandCenter, 500)
 }
 var renderQuestion = function() {
@@ -918,24 +921,73 @@ var renderQuestion = function() {
     $quizB.text(quiz[questionIndex].responses[1]).click(check);
     $quizC.text(quiz[questionIndex].responses[2]).click(check);
     $quizD.text(quiz[questionIndex].responses[3]).click(check);
-    console.log('renderQuestion')
+
 }
 renderQuestion();
 
 ///////////////////////////////
 //////////////////////////////
 //PAGE FUNCTIONALITY
+var congratulations = function() {
+    $('#winning-audio').trigger('play');
+    var $congratsStats = $('#congrats-stats');
+    var $div = $('<div>').addClass('scores-table standings scores-flex console-score centered');
+    $div.append($('<p>').text(`FINAL RECORD: ${browns.wins}:${browns.losses}:${browns.ties}`));
+    $div.append($('<p>').text(`TOTAL POINTS: ${browns.totalPoints}`));
+    $div.append($('<p>').text(`TOTAL QUESTIONS CORRECT: ${correctAnswerTally}/16`));
+    $congratsStats.append($div);
+    $('#congratulations').removeClass('hide');
+}
+var youLost = function() {
+    $('#losing-audio').trigger('play');
+
+}
+var renderPlayoffs = function() {
+    var afcEastByWins = afcEast.sort(function(a, b) {
+        return b.wins - a.wins
+    });
+    var afcNorthByWins = afcNorth.sort(function(a, b) {
+        return b.wins - a.wins
+    })
+    var afcSouthByWins = afcSouth.sort(function(a, b) {
+        return b.wins - a.wins
+    })
+    var afcWestByWins = afcWest.sort(function(a, b) {
+        return b.wins - a.wins
+    })
+
+    var afcByWins = [afcEastByWins, afcWestByWins, afcSouthByWins, afcNorthByWins];
+
+
+    var afcStandingsByWins = [];
+    afcByWins.map(function(x) {
+        x.map(function(y) {
+            return afcStandingsByWins.push(y);
+        })
+    });
+
+    var afcStandingsByWins = afcStandingsByWins.sort(function(a, b) {
+        return b.wins - a.wins
+    })
+    var afcPlayoffs = [];
+    for (i = 0; i < 6; i++) {
+        afcPlayoffs.push(afcStandingsByWins.shift())
+
+    }
+
+    if (afcPlayoffs.indexOf(browns) >= 0) {
+        congratulations();
+
+    } else {
+        youLost();
+    }
+}
 var nextweek = function() {
 
     $('#sim-week').off('click', schedule[questionIndex]);
-    questionIndex++;
-    $('#sim-week').click(schedule[questionIndex]);
-    if (questionIndex == 16) {
-        console.log('season complete');
-        $('#sim-week').off('click', schedule[questionIndex]);
-    } else {
-        renderQuestion();
-    }
+
+
+
 }
 
 function revealResults() {
@@ -944,9 +996,20 @@ function revealResults() {
 }
 
 function revealQuiz() {
-    $('#game-score').empty();
-    $('#main-container').addClass('hide');
-    $('#quiz-modal').removeClass('hide');
+    questionIndex++;
+    $('#sim-week').click(schedule[questionIndex]);
+    if (questionIndex == 16) {
+        $('#sim-week').off('click', schedule[questionIndex]);
+        renderPlayoffs();
+        $('#main-container').addClass('hide');
+
+    } else {
+        renderQuestion();
+        $('#game-score').empty();
+        $('#main-container').addClass('hide');
+        $('#quiz-modal').removeClass('hide');
+
+    }
 }
 
 function revealCommandCenter() {
@@ -961,7 +1024,14 @@ $('#sim-week').click(nextweek);
 $('#results-button').click(revealResults);
 $('#quiz-button').click(revealQuiz);
 
-
+function test() {
+    var $congratsStats = $('#congrats-stats');
+    var $div = $('<div>').addClass('scores-table standings scores-flex console-score centered');
+    $div.append($('<p>').text(`FINAL RECORD: ${browns.wins}:${browns.losses}:${browns.ties}`));
+    $div.append($('<p>').text(`TOTAL POINTS: ${browns.totalPoints}`));
+    $div.append($('<p>').text(`TOTAL QUESTIONS CORRECT: ${correctAnswerTally}/16`));
+    $congratsStats.append($div);
+}
 
 
 

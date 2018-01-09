@@ -53,6 +53,13 @@ body {
     position: absolute;
 }
 
+#congratulations {
+    background: #654321;
+    height: 99%;
+    width: 99%;
+    border: 5px solid white;
+    position: absolute;
+}
 
 .content {
     display: flex;
@@ -259,6 +266,20 @@ body {
 #quiz-button {
     top: 75%;
 }
+
+#congrats-stats {
+    color: white;
+}
+
+.small {
+    font-size: 10px;
+}
+
+
+
+
+
+
 
 
 
