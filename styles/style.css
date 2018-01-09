@@ -271,9 +271,141 @@ body {
     color: white;
 }
 
-.small {
-    font-size: 10px;
+.absolute {
+    position: absolute;
 }
+
+#elf-logo {
+    background: url(../images/brownself.png);
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    margin-left: 40%;
+    margin-top: -20px;
+}
+
+#landing {
+    color: white;
+    font-size: 20px;
+    height: 99%;
+    width: 99%;
+    border: 5px solid white;
+    display: flex;
+    position: absolute;
+}
+
+.spacing {
+    letter-spacing: 2px;
+}
+
+#loser {
+    background: black;
+    color: white;
+    font-size: 20px;
+    height: 99%;
+    width: 99%;
+    border: 5px solid white;
+    display: flex;
+    position: absolute;
+}
+
+
+
+
+.loser-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    background: black;
+    padding: 100px 40px 0 40px;
+}
+
+#loser-logo {
+    background: url(../images/brownsfan.png);
+    background-size: cover;
+    height: 350px;
+    width: 350px;
+    margin-left: 35%;
+    margin-top: -20px;
+}
+
+.game-over {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

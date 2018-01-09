@@ -11,7 +11,23 @@
 <body>
     <div class="nav">
     </div>
-    <div id="quiz-modal" class="left">
+    <div id="landing" class="left">
+        <div class="content ">
+            <div class="centered title">&starf;NFL TRIVIA LEAGUE&starf;</div>
+            <div class="greeting title centered">&starf; &starf; LETS TAKE THE BROWNS TO THE SUPER BOWL &starf; &starf;</div>
+            <div id="elf-logo">
+            </div>
+            <div class="centered spacing">
+                <p>&starf; PREPARE FOR YOUR WEEKLY MATCHUPS &starf;</p>
+                <p>&starf; BY ANSWERING TRIVIA QUESTIONS ABOUT NFL HISTORY &starf;</p>
+                <p>&starf; YOUR RESPONSES DETERMINE &starf;</p>
+                <p>&starf; YOUR PERFORMANCE ON THE FIELD &starf;</p>
+                <p class="title">GOOD LUCK</p>
+            </div>
+        </div>
+        <div id="home-button" class="slide-button centered border-radius ">WEEK 1</div>
+    </div>
+    <div id="quiz-modal" class="left hide">
         <div class="quiz-card">
             <div class="quiz-question quiz-border-radius">
                 <div id="week-declaration">WEEK
@@ -63,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div id="quiz-button" class="slide-button centered border-radius">ADVANCE TO NEXT QUESTION</div>
+        <div id="quiz-button" class="slide-button centered border-radius">ADVANCE TO NEXT WEEK</div>
     </div>
     <!--  -->
     <div id="console-container" class="left hide">
@@ -72,26 +88,38 @@
             <div class="greeting title centered"></div>
             <div id="game-score">
             </div>
-            <div id="sim-week" class="centered quiz-choices border-radius">PLAY GAME</div>
+            <div id="sim-week" class="centered quiz-choices border-radius">CLICK TO PLAY YOUR NEXT OPPONENT</div>
         </div>
         <div id="results-button" class="slide-button centered border-radius">VIEW WEEK'S RESULTS</div>
     </div>
     <div id="congratulations" class="left hide">
         <div class="content ">
             <div class="centered title">&starf; &starf; &starf;CONGRATULATIONS &starf; &starf; &starf;</div>
-            <div id="congrats-win-counter" class="greeting title centered ">YOU LED THE BROWNS TO THE PLAYOFFS FOR THE FIRST TIME IN 16 YEARS</div>
+            <div id="congrats-win-counter" class="game-over title centered ">&starf; YOU LED THE BROWNS TO THE PLAYOFFS FOR THE FIRST TIME IN 16 YEARS &starf;</div>
             <div id="congrats-stats">
             </div>
         </div>
-        <div id="results-button " class="slide-button centered border-radius ">VIEW WEEK'S RESULTS</div>
+        <div id="results-button" class="slide-button centered border-radius ">VIEW WEEK'S RESULTS</div>
     </div>
-    <audio id="winning-audio" controls>
+    <div id="loser" class="left hide">
+        <div class="loser-content">
+            <div class="centered title">YOURE FIRED</div>
+            <div id="congrats-win-counter" class="game-over title centered ">
+                <div id="loser-logo">
+                </div>
+                <p>YOU MISSED THE PLAYOFFS</p>
+            </div>
+            <div id="loser-stats">
+            </div>
+        </div>
+        <div id="try-again" class="slide-button centered border-radius">TRY AGAIN</div>
+    </div>
+    <audio id="winning-audio" class="hide absolute" controls>
         <source src="audio/wintheme.mp3" type="audio/mpeg">
     </audio>
-    <audio id="losing-audio" controls>
+    <audio id="losing-audio" class="hide absolute" controls>
         <source src="audio/losertheme.mp3" type="audio/mpeg">
     </audio>
-    <script type="text/javascript " src="js/info.js "></script>
     <script type="text/javascript " src="js/script.js "></script>
 </body>
 

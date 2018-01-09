@@ -901,7 +901,7 @@ var setSkillDown = function() {
 }
 
 var check = function() {
-
+    $('#results-button').off('click', revealResults);
     if (this.textContent == quiz[questionIndex].correct) {
         console.log("GOOD");
         console.log(correctAnswerTally++);
@@ -934,13 +934,17 @@ var congratulations = function() {
     var $div = $('<div>').addClass('scores-table standings scores-flex console-score centered');
     $div.append($('<p>').text(`FINAL RECORD: ${browns.wins}:${browns.losses}:${browns.ties}`));
     $div.append($('<p>').text(`TOTAL POINTS: ${browns.totalPoints}`));
-    $div.append($('<p>').text(`TOTAL QUESTIONS CORRECT: ${correctAnswerTally}/16`));
     $congratsStats.append($div);
     $('#congratulations').removeClass('hide');
 }
 var youLost = function() {
     $('#losing-audio').trigger('play');
-
+    var $loserStats = $('#loser-stats');
+    var $div = $('<div>').addClass('scores-table standings scores-flex console-score centered');
+    $div.append($('<p>').text(`FINAL RECORD: ${browns.wins}:${browns.losses}:${browns.ties}`));
+    $div.append($('<p>').text(`TOTAL POINTS: ${browns.totalPoints}`));
+    $loserStats.append($div);
+    $('#loser').removeClass('hide');
 }
 var renderPlayoffs = function() {
     var afcEastByWins = afcEast.sort(function(a, b) {
@@ -985,7 +989,7 @@ var renderPlayoffs = function() {
 var nextweek = function() {
 
     $('#sim-week').off('click', schedule[questionIndex]);
-
+    $('#results-button').click(revealResults);
 
 
 }
@@ -1017,22 +1021,25 @@ function revealCommandCenter() {
     $('#quiz-modal').addClass('hide');
 }
 
-
-
-$('#sim-week').click(schedule[questionIndex]);
-$('#sim-week').click(nextweek);
-$('#results-button').click(revealResults);
-$('#quiz-button').click(revealQuiz);
-
-function test() {
-    var $congratsStats = $('#congrats-stats');
-    var $div = $('<div>').addClass('scores-table standings scores-flex console-score centered');
-    $div.append($('<p>').text(`FINAL RECORD: ${browns.wins}:${browns.losses}:${browns.ties}`));
-    $div.append($('<p>').text(`TOTAL POINTS: ${browns.totalPoints}`));
-    $div.append($('<p>').text(`TOTAL QUESTIONS CORRECT: ${correctAnswerTally}/16`));
-    $congratsStats.append($div);
+function openQuiz() {
+    $('#quiz-modal').removeClass('hide');
+    $('#landing').addClass('hide');
 }
 
+
+function init() {
+
+
+    $('#sim-week').click(schedule[questionIndex]);
+    $('#sim-week').click(nextweek);
+    $('#quiz-button').click(revealQuiz);
+    $('#home-button').click(openQuiz);
+    $('#try-again').click(function() {
+        location.reload();
+    });
+
+}
+init();
 
 
 
