@@ -7,7 +7,7 @@ In this launch version of NFL TRIVIA FOOTBALL, you have been hired as coach of t
 
 ---
 
-Link to game:https://keithmccall.github.io/project_1/
+Link to game:https://keithmccall.github.io/browns-game/
 
 # THOUGHTS
 *What is the game about?
